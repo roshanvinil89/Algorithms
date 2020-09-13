@@ -1,24 +1,21 @@
 package com.codeskittles.learning.algorithms.sorting;
 
-public final class InsertionSort<T extends Comparable<T>> implements ISort<T> {
+public class InsertionSort<T extends Comparable<T>> implements ISort<T> {
 
-    public void sort(T[] arrayToSort) {
+    @Override
+    public void sort(final T[] arrayToSort) {
 
-        for (int i = 0; i < arrayToSort.length - 1; i++) {
+        for (int i = 1; i < arrayToSort.length; i++) {
+            T key = arrayToSort[i];
+            int j = i - 1;
 
-            T smallestValue = arrayToSort[i];
-            int smallestValueIndex = i;
-
-            for (int j = i + 1; j < arrayToSort.length; j++) {
-                if (smallestValue.compareTo(arrayToSort[j]) > 0) {
-                    smallestValue = arrayToSort[j];
-                    smallestValueIndex = j;
-                }
+            while (j >= 0 && arrayToSort[j].compareTo(key) > 0) {
+                arrayToSort[j + 1] = arrayToSort[j];
+                j--;
             }
 
-            T temp = arrayToSort[i];
-            arrayToSort[i] = arrayToSort[smallestValueIndex];
-            arrayToSort[smallestValueIndex] = temp;
+            arrayToSort[j + 1] = key;
+
         }
     }
 }
